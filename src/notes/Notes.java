@@ -19,8 +19,19 @@ public class Notes extends JFrame {
         setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE) ;
 
-        add (new TextView(model), BorderLayout.WEST) ;
-        add (new ControlPanel(model), BorderLayout.EAST) ;
+        ImageIcon image_icon = new ImageIcon(getClass().getResource("/img/icon.png"));
+        setIconImage(image_icon.getImage());
+
+        JPanel mainPanel = new JPanel( new BorderLayout()) {
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon image_background = new ImageIcon(getClass().getResource("/img/background.jpg"));
+                g.drawImage(image_background.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        } ;
+        mainPanel.add (new TextView(model), BorderLayout.WEST) ;
+        mainPanel.add (new ControlPanel(model), BorderLayout.EAST) ;
+        setContentPane(mainPanel);
 
         setVisible(true) ;
         setResizable(false) ;

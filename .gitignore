@@ -127,4 +127,4 @@ fabric.properties
 #locals
 .idea/
 Notes.iml
-img/
+src/img/

@@ -4,6 +4,7 @@ import notes.handler.WriteHandler;
 import notes.text.Text;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
@@ -33,14 +34,13 @@ public class ControlPanel extends JPanel implements Observer {
                 writtenText
         )) ;
 
-        JPanel mainPan = new JPanel() ;
-
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(250, 0, 275, 25) );
+        add(writtenText);
+        add(Box.createRigidArea(new Dimension(1, 25)));
+        add(sendText) ;
 
         setOpaque(false) ;
-        setLayout(new GridLayout(0, 1, 15, 15)) ;
-        setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        add (writtenText) ;
-        add (sendText) ;
     }
 
     private void initButton () {
@@ -50,7 +50,7 @@ public class ControlPanel extends JPanel implements Observer {
                 Font.PLAIN,
                 20
         ));
-        sendText.setPreferredSize(new Dimension(
+        sendText.setMaximumSize(new Dimension(
                 175,
                 100
         ));
@@ -70,6 +70,7 @@ public class ControlPanel extends JPanel implements Observer {
                 Font.PLAIN,
                 25
         ));
+        writtenText.setBackground( new Color(255, 255, 255, 150) );
     }
 
     @Override

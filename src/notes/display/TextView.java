@@ -3,6 +3,7 @@ package notes.display;
 import notes.text.Text;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -31,6 +32,16 @@ public class TextView extends JPanel implements Observer {
 
         renderText.setEditable(false) ;
         renderText.setLineWrap(true) ;
+        // BUG : catch a residual image when opacity changed
+        renderText.setBackground( new Color(255, 255, 255, 150) );
+
+        textWraper.setOpaque(false);
+        textWraper.getViewport().setOpaque(false);
+        textWraper.setBorder(null);
+        textWraper.setViewportBorder(null);
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(25, 25, 25, 0) );
         add(textWraper) ;
 
         setOpaque (false) ;
@@ -43,13 +54,11 @@ public class TextView extends JPanel implements Observer {
                 StringBuilder sb ;
                 Text model ;
 
-
                 model = (Text)o ;
                 sb = new StringBuilder() ;
                 for (int i = 0; i < model.getLineCount(); ++i) {
                     sb.append(model.getLine(i)).append("\r\n") ;
                 }
-
                 renderText.setText(sb.toString()) ;
             }
             else if ((int)arg != STYLE_MODIFICATION){
