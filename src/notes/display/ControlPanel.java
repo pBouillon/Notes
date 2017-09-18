@@ -48,7 +48,7 @@ public class ControlPanel extends JPanel implements Observer {
         sendText.setFont(new Font(
                 "Serif",
                 Font.PLAIN,
-                20
+                24
         ));
         sendText.setMaximumSize(new Dimension(
                 175,
@@ -68,9 +68,8 @@ public class ControlPanel extends JPanel implements Observer {
         writtenText.setFont(new Font(
                 "Serif",
                 Font.PLAIN,
-                25
+                28
         ));
-        writtenText.setBackground( new Color(255, 255, 255, 150) );
     }
 
     @Override

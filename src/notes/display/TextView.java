@@ -20,31 +20,30 @@ public class TextView extends JPanel implements Observer {
         super() ;
         setSize(new Dimension(500,700));
         o.addObserver (this) ;
+        setOpaque (false) ;
 
         renderText = new JTextArea() ;
-        renderText.setPreferredSize(
+        renderText.setFont(new Font(
+                "Serif",
+                Font.PLAIN,
+                18
+        ));
+
+        textWraper = new JScrollPane(renderText) ;
+        textWraper.setPreferredSize(
                 new Dimension(
                         500,
-                        550
+                        renderText.getHeight()
                 )
         );
-        textWraper = new JScrollPane(renderText) ;
+
 
         renderText.setEditable(false) ;
         renderText.setLineWrap(true) ;
-        // BUG : catch a residual image when opacity changed
-        renderText.setBackground( new Color(255, 255, 255, 150) );
-
-        textWraper.setOpaque(false);
-        textWraper.getViewport().setOpaque(false);
-        textWraper.setBorder(null);
-        textWraper.setViewportBorder(null);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(25, 25, 25, 0) );
         add(textWraper) ;
-
-        setOpaque (false) ;
     }
 
     @Override
