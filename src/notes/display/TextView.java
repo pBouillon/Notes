@@ -23,27 +23,34 @@ public class TextView extends JPanel implements Observer {
         setOpaque (false) ;
 
         renderText = new JTextArea() ;
+        initTextArea() ;
+
+        textWraper = new JScrollPane(renderText) ;
+        initWraper() ;
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(25, 25, 25, 0) );
+        setOpaque(false);
+        add(textWraper) ;
+    }
+
+    private void initTextArea() {
         renderText.setFont(new Font(
                 "Serif",
                 Font.PLAIN,
                 18
-        ));
+        )) ;
+        renderText.setEditable(false) ;
+        renderText.setLineWrap(true) ;
+    }
 
-        textWraper = new JScrollPane(renderText) ;
+    private void initWraper() {
         textWraper.setPreferredSize(
                 new Dimension(
                         500,
                         renderText.getHeight()
                 )
-        );
-
-
-        renderText.setEditable(false) ;
-        renderText.setLineWrap(true) ;
-
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(25, 25, 25, 0) );
-        add(textWraper) ;
+        ) ;
     }
 
     @Override

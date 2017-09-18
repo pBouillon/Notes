@@ -47,7 +47,7 @@ public class ControlPanel extends JPanel implements Observer {
         buttonPanel.add(deleteText);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(new EmptyBorder(250, 0, 275, 25) );
+        setBorder(new EmptyBorder(325, 0, 200, 25) );
         add(writtenText);
         add(Box.createRigidArea(new Dimension(1, 25)));
         add(buttonPanel) ;

@@ -25,7 +25,7 @@ public class Notes extends JFrame {
         JPanel mainPanel = new JPanel( new BorderLayout()) {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon image_background = new ImageIcon(getClass().getResource("/img/background.jpg"));
+                ImageIcon image_background = new ImageIcon(getClass().getResource("/img/background.jpeg"));
                 g.drawImage(image_background.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         } ;

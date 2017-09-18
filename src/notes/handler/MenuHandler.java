@@ -94,8 +94,6 @@ public class MenuHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
         switch (((JMenuItem)e.getSource()).getText()) {
             case "New" :
                 createNewDocument() ;
