@@ -12,6 +12,11 @@ import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import static notes.text.Text.STYLE_MODIFICATION;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class NotesMenu extends JMenuBar implements Observer {
 
     private Text m ;
@@ -50,6 +55,12 @@ public class NotesMenu extends JMenuBar implements Observer {
         add(styleMenu) ;
     }
 
+    /**
+     * Builds the style menu and its options:
+     *  > adds a new style
+     *  > chose an existing style
+     * @return Style menu
+     */
     private JMenu createColorMenu() {
         JMenu styleMenu = new JMenu("Style") ;
             styleMenu.setMnemonic('S');

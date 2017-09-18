@@ -13,6 +13,11 @@ import java.util.Observer;
 import static notes.text.Text.FILE_MODIFICATION;
 import static notes.text.Text.TEXT_MODIFICATION;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class ControlPanel extends JPanel implements Observer {
 
     private JTextField writtenText ;
@@ -28,7 +33,7 @@ public class ControlPanel extends JPanel implements Observer {
         writtenText = new JTextField (20) ;
         initTextField () ;
 
-        ButtonHandler ctrl = new ButtonHandler( this, (Text)o, writtenText) ;
+        ButtonHandler ctrl = new ButtonHandler((Text)o, writtenText) ;
         sendText   = new JButton("Write") ;
         deleteText = new JButton("Delete");
         initWriteButton() ;
@@ -55,6 +60,9 @@ public class ControlPanel extends JPanel implements Observer {
         setOpaque(false) ;
     }
 
+    /**
+     * Set up options for JButton::sendText
+     */
     private void initDeleteButton() {
         deleteText.setFont(new Font(
                 "Serif",
@@ -67,6 +75,9 @@ public class ControlPanel extends JPanel implements Observer {
         ));
     }
 
+    /**
+     * Set up options for JButton::deleteText
+     */
     private void initWriteButton() {
         sendText.setFont(new Font(
                 "Serif",
@@ -79,6 +90,9 @@ public class ControlPanel extends JPanel implements Observer {
         ));
     }
 
+    /**
+     * Set up options for JTextfield::writtenText
+     */
     private void initTextField () {
         writtenText.setPreferredSize(new Dimension(writtenText.getWidth(), 150));
         writtenText.addActionListener(new AbstractAction() {

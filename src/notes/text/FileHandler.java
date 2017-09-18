@@ -3,10 +3,21 @@ package notes.text;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class FileHandler {
 
     public FileHandler() {}
 
+    /**
+     * Read a file and return its content
+     *
+     * @param source target file
+     * @return an arrayList with the content of the target file
+     */
     public ArrayList<String> loadFile (File source) {
         InputStream       ips = null ;
         BufferedReader    br  = null ;
@@ -31,6 +42,12 @@ public class FileHandler {
         return content ;
     }
 
+    /**
+     * Write `content` inside a file
+     *
+     * @param destination target file
+     * @param content     content to put inside `destination`
+     */
     public void saveFile (File destination, ArrayList<String> content) {
         PrintWriter pw = null ;
 

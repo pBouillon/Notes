@@ -11,6 +11,11 @@ import java.awt.event.ActionListener;
 import static notes.text.Text.FILE_MODIFICATION;
 import static notes.text.Text.STYLE_MODIFICATION;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class MenuHandler implements ActionListener {
     public final static int RGB_STEP   = 3 ;
     private final String    RGB_FORMAT = "000" ;
@@ -21,12 +26,18 @@ public class MenuHandler implements ActionListener {
         this.model = model ;
     }
 
+    /**
+     * Empty the current content of the text area
+     */
     private void createNewDocument() {
         model.clear();
         model.setModelChanged();
         model.notifyObservers(FILE_MODIFICATION);
     }
 
+    /**
+     * Open a document and fill the text area with its content
+     */
     private void openDocument() {
         JFileChooser chooser ;
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -44,6 +55,9 @@ public class MenuHandler implements ActionListener {
         model.notifyObservers(FILE_MODIFICATION) ;
     }
 
+    /**
+     * Save the content of the text area inside a document
+     */
     private void saveDocument () {
         JFileChooser chooser ;
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -57,6 +71,11 @@ public class MenuHandler implements ActionListener {
         }
     }
 
+    /**
+     * Open a color picker
+     * Open a dialog to give this color a name
+     * Save it and add it in the menu bar
+     */
     private void createNewColor() {
         Color newColor = JColorChooser.showDialog(
                 null,
@@ -73,6 +92,12 @@ public class MenuHandler implements ActionListener {
         }
     }
 
+    /**
+     * Get the value of the clicked color name
+     * Sent it as foreground for the text area
+     *
+     * @param key the key of the stored Color
+     */
     private void sendSelectedColor(String key) {
         Color toChange = model.getColor(key) ;
         // initialization at 1 avoid the deletion of leading '0'

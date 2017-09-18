@@ -8,9 +8,14 @@ import notes.text.Text;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class Notes extends JFrame {
-    public final int WINDOW_HEIGHT = 700 ;
-    public final int WINDOW_WIDTH  = 1000 ;
+    private final int WINDOW_HEIGHT = 700 ;
+    private final int WINDOW_WIDTH  = 1000 ;
 
     public Notes(Text model) {
         super() ;

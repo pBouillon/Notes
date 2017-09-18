@@ -8,6 +8,11 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 import static notes.handler.MenuHandler.RGB_STEP;
 import static notes.text.Text.*;
 

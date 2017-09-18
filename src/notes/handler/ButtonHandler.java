@@ -1,6 +1,5 @@
 package notes.handler;
 
-import notes.display.ControlPanel;
 import notes.text.Text;
 
 import javax.swing.*;
@@ -9,16 +8,19 @@ import java.awt.event.ActionListener;
 
 import static notes.text.Text.TEXT_MODIFICATION;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class ButtonHandler implements ActionListener {
 
-    private ControlPanel view ;
     private JTextField   textWritten;
     private Text         model ;
 
-    public ButtonHandler(ControlPanel view, Text model, JTextField writtenText) {
+    public ButtonHandler(Text model, JTextField writtenText) {
         this.model = model ;
         this.textWritten = writtenText ;
-        this.view  = view ;
     }
 
     @Override

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
+/**
+ * @author "Pierre Bouillon" [pierrebouillon.tech]
+ * @version 1.0.0
+ */
+
 public class Text extends Observable implements IText {
 
     public static int STYLE_MODIFICATION = 1 ;
@@ -26,33 +31,58 @@ public class Text extends Observable implements IText {
         savedColor.put("Black", Color.BLACK) ;
     }
 
+    /**
+     * Add a color with its name
+     *
+     * @param s color name
+     * @param c color to add
+     */
     public void addColor(String s, Color c) {
         savedColor.put(s, c) ;
     }
 
+    /**
+     * Fill `textCore` with the content of a file
+     *
+     * @param source target file
+     */
     public void loadFile(File source) {
         textCore = fileHandler.loadFile(source) ;
     }
 
+    /**
+     * Get all color names in an ArrayList
+     *
+     * @return all the color names
+     */
     public ArrayList<String> getAllColorNames() {
         ArrayList<String> keyStr = new ArrayList<>() ;
         keyStr.addAll(savedColor.keySet()) ;
         return keyStr ;
     }
 
-    public Color getDefaultColor() {
-        String key = savedColor.keySet().stream().findFirst().get() ;
-        return savedColor.get(key) ;
-    }
-
+    /**
+     * Get a stored color through its name
+     *
+     * @param  key name of the color
+     * @return the matching color
+     */
     public Color getColor(String key) {
         return savedColor.get(key) ;
     }
 
+    /**
+     * Put the content of `textCore` inside a file
+     *
+     * @param destination target file
+     */
     public void saveFile(File destination) {
         fileHandler.saveFile(destination, textCore) ;
     }
 
+    /**
+     * Prepare for Observer.notifyAll()
+     */
     public void setModelChanged() {
         setChanged() ;
     }
