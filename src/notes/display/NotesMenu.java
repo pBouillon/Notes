@@ -4,9 +4,12 @@ import notes.handler.MenuHandler;
 import notes.text.Text;
 
 import javax.swing.*;
+import java.awt.event.InputEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import static java.awt.event.InputEvent.ALT_DOWN_MASK;
+import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import static notes.text.Text.STYLE_MODIFICATION;
 
 public class NotesMenu extends JMenuBar implements Observer {
@@ -23,14 +26,19 @@ public class NotesMenu extends JMenuBar implements Observer {
         ctrl = new MenuHandler(m) ;
 
         JMenu fileMenu = new JMenu("File") ;
+        fileMenu.setMnemonic('F') ;
             JMenuItem newFile  = new JMenuItem("New") ;
-            newFile.addActionListener(ctrl) ;
+                newFile.setAccelerator(KeyStroke.getKeyStroke('N', CTRL_DOWN_MASK));
+                newFile.addActionListener(ctrl) ;
             JMenuItem openFile = new JMenuItem("Open") ;
-            openFile.addActionListener(ctrl) ;
+                openFile.setAccelerator(KeyStroke.getKeyStroke('O', CTRL_DOWN_MASK));
+                openFile.addActionListener(ctrl) ;
             JMenuItem saveFile = new JMenuItem("Save") ;
-            saveFile.addActionListener(ctrl) ;
+                saveFile.setAccelerator(KeyStroke.getKeyStroke('S', CTRL_DOWN_MASK));
+                saveFile.addActionListener(ctrl) ;
             JMenuItem quitFile = new JMenuItem("Quit") ;
-            quitFile.addActionListener(ctrl) ;
+                quitFile.setAccelerator(KeyStroke.getKeyStroke('Q', CTRL_DOWN_MASK));
+                quitFile.addActionListener(ctrl) ;
         fileMenu.add(newFile)  ;
         fileMenu.add(openFile) ;
         fileMenu.add(saveFile) ;
@@ -44,7 +52,9 @@ public class NotesMenu extends JMenuBar implements Observer {
 
     private JMenu createColorMenu() {
         JMenu styleMenu = new JMenu("Style") ;
-        JMenuItem newStyle = new JMenuItem("New style") ;
+            styleMenu.setMnemonic('S');
+        JMenuItem newStyle = new JMenuItem("New color") ;
+            newStyle.setAccelerator(KeyStroke.getKeyStroke('C', CTRL_DOWN_MASK));
         styleMenu.add(newStyle) ;
         newStyle.addActionListener(ctrl) ;
         for (String s : m.getAllColorNames()) {

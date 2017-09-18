@@ -1,6 +1,6 @@
 package notes.display;
 
-import notes.handler.WriteHandler;
+import notes.handler.ButtonHandler;
 import notes.text.Text;
 
 import javax.swing.*;
@@ -17,34 +17,57 @@ public class ControlPanel extends JPanel implements Observer {
 
     private JTextField writtenText ;
     private JButton sendText ;
+    private JButton deleteText;
 
     public ControlPanel(Observable o) {
         super () ;
         setSize(new Dimension(500,700));
         o.addObserver(this) ;
 
+
         writtenText = new JTextField (20) ;
         initTextField () ;
 
-        sendText = new JButton("Write") ;
-        initButton() ;
-        sendText.addActionListener(new WriteHandler(
-                this,
-                (Text)o,
-                writtenText
-        )) ;
+        ButtonHandler ctrl = new ButtonHandler( this, (Text)o, writtenText) ;
+        sendText   = new JButton("Write") ;
+        deleteText = new JButton("Delete");
+        initWriteButton() ;
+        initDeleteButton() ;
+        sendText.addActionListener(ctrl) ;
+        deleteText.addActionListener(ctrl) ;
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(
+                buttonPanel.getWidth(),
+                150
+        ));
+        buttonPanel.setLayout(new GridLayout(0,2, 10, 0));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(sendText);
+        buttonPanel.add(deleteText);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(250, 0, 275, 25) );
         add(writtenText);
         add(Box.createRigidArea(new Dimension(1, 25)));
-        add(sendText) ;
+        add(buttonPanel) ;
 
         setOpaque(false) ;
     }
 
-    private void initButton () {
-        sendText.setForeground(Color.BLACK);
+    private void initDeleteButton() {
+        deleteText.setFont(new Font(
+                "Serif",
+                Font.PLAIN,
+                24
+        ));
+        deleteText.setMaximumSize(new Dimension(
+                175,
+                115
+        ));
+    }
+
+    private void initWriteButton() {
         sendText.setFont(new Font(
                 "Serif",
                 Font.PLAIN,
@@ -52,7 +75,7 @@ public class ControlPanel extends JPanel implements Observer {
         ));
         sendText.setMaximumSize(new Dimension(
                 175,
-                100
+                115
         ));
     }
 
