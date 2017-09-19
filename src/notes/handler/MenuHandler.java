@@ -7,6 +7,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 import static notes.text.Text.FILE_MODIFICATION;
 import static notes.text.Text.STYLE_MODIFICATION;
@@ -72,24 +74,40 @@ public class MenuHandler implements ActionListener {
     }
 
     /**
-     * Open a color picker
-     * Open a dialog to give this color a name
-     * Save it and add it in the menu bar
      */
     private void createNewColor() {
-        Color newColor = JColorChooser.showDialog(
-                null,
-                "Pick a new Color",
-                Color.BLACK) ;
-        if (newColor != null) {
-            String newColorName = JOptionPane.showInputDialog(null, "Name this color : ",
-                    "New color", JOptionPane.QUESTION_MESSAGE) ;
-            if (newColorName != null) {
-                model.addColor(newColorName, newColor) ;
-                model.setModelChanged() ;
-                model.notifyObservers(STYLE_MODIFICATION) ;
-            }
+        String newColorName = JOptionPane.showInputDialog(null, "Enter the name of the color class : ",
+                "New color", JOptionPane.QUESTION_MESSAGE) ;
+
+        try {
+            Class c = Class.forName("notes." + newColorName) ;
+            Object newColor = c.newInstance();
+
+            String colorName  ;
+            Color  colorValue ;
+
+            colorName  = (String) c.getMethod("getName").invoke(newColor) ;
+            colorValue = (Color) c.getMethod("getColor").invoke(newColor) ;
+
+            model.addColor(colorName, colorValue) ;
+            model.setModelChanged() ;
+            model.notifyObservers(STYLE_MODIFICATION);
+
+        } catch (ClassNotFoundException e) {
+            raiseError("Loading Error",
+                    "Missing style '" + newColorName +"'") ;
+        } catch (IllegalAccessException | InstantiationException e) {
+            raiseError("Loading Error",
+                    "Corrupted Class") ;
+        } catch (NoSuchMethodException | InvocationTargetException e) {
+            raiseError("Class Error",
+                    "Unable to gather class information") ;
         }
+    }
+
+    private void raiseError(String title, String message) {
+        JOptionPane.showMessageDialog(null,message,
+                title, JOptionPane.ERROR_MESSAGE) ;
     }
 
     /**
